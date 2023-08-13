@@ -24,19 +24,21 @@ struct DefaultHabitsSelectionView: View {
         Habit(name: "Fruits", labelColor: "red", complete: false, imageName: "fruitsIcon", goal: nil),
         Habit(name: "Sleep", labelColor: "red", complete: false, imageName: "sleepIcon", goal: nil)
     ]
-
-    @Binding var defaultsChosen: Bool
+    
+    @Environment(\.dismiss) var dismiss
     @Binding var userHabits: [Habit]
+    @Binding var onboardingDone: Bool
     @State var selectedCardIndecies = [Int]()
 
     let columns = [GridItem(.adaptive(minimum: 150))]
 
     var body: some View {
         VStack{
+            Spacer()
             HStack {
                 Spacer()
                 Button("Skip") {
-                    defaultsChosen = true
+                    onboardingDone = true
                 }
                 .padding(.horizontal)
             }
@@ -57,7 +59,8 @@ struct DefaultHabitsSelectionView: View {
                         print(index)
                         userHabits.append(defaultHabits[index])
                     }
-                    defaultsChosen = true
+                    onboardingDone = true
+                    dismiss()
                 } label: {
                     Text("Continue")
                         .font(.custom("SFProDisplay-Bold", size: 20))
@@ -79,8 +82,9 @@ struct DefaultHabitsSelectionView: View {
 
 struct DefaultHabitsSelectionView_Previews: PreviewProvider {
     @State static var defaultsChosen = false
+    @State static var onboardingDone = false
     @State static var userHabits = [Habit]()
     static var previews: some View {
-        DefaultHabitsSelectionView(defaultsChosen: $defaultsChosen, userHabits: $userHabits)
+        DefaultHabitsSelectionView(userHabits: $userHabits, onboardingDone: $onboardingDone)
     }
 }

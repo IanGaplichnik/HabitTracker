@@ -10,16 +10,18 @@ import SwiftUI
 struct OnboardingTabView: View {
     struct OnboardingButton: View {
         @Binding var currentPageIndex: Int
+        @Binding var userHabits: [Habit]
+        @Binding var sheetIsShowing: Bool
+        let itemsCount: Int
         @Binding var onboardingDone: Bool
-        var itemsCount: Int
 
         var body: some View {
             Button() {
                 withAnimation {
-                    if currentPageIndex == itemsCount - 1 {
-                        onboardingDone = true
-                    } else {
+                    if currentPageIndex != itemsCount - 1 {
                         currentPageIndex += 1
+                    } else {
+                        sheetIsShowing = true
                     }
                 }
             } label: {
@@ -33,11 +35,16 @@ struct OnboardingTabView: View {
             }
             .padding(.horizontal, 30)
             .padding(.vertical)
+            .sheet(isPresented: $sheetIsShowing) {
+                DefaultHabitsSelectionView(userHabits: $userHabits, onboardingDone: $onboardingDone)
+            }
         }
     }
 
     @State private var currentPageIndex = 0
+    @State private var sheetIsShowing = false
     @Binding var onboardingDone: Bool
+    @Binding var userHabits: [Habit]
 
     let items = [
         OnboardingItem(id: 0,
@@ -66,9 +73,14 @@ struct OnboardingTabView: View {
             .onAppear {
                 setupColor()
             }
-            OnboardingButton(currentPageIndex: $currentPageIndex, onboardingDone: $onboardingDone, itemsCount: items.count)
+            OnboardingButton(currentPageIndex: $currentPageIndex,
+                             userHabits: $userHabits,
+                             sheetIsShowing: $sheetIsShowing,
+                             itemsCount: items.count,
+                             onboardingDone: $onboardingDone)
         }
     }
+
 
     func setupColor() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.label
@@ -78,8 +90,9 @@ struct OnboardingTabView: View {
 
 struct OnboardingTabView_Previews: PreviewProvider {
     @State static var onboardingDone = false
+    @State static var userHabits = [Habit]()
     static var previews: some View {
-        OnboardingTabView(onboardingDone: $onboardingDone)
-//            .preferredColorScheme(.dark)
+        OnboardingTabView(onboardingDone: $onboardingDone, userHabits: $userHabits)
+        //            .preferredColorScheme(.dark)
     }
 }

@@ -8,19 +8,21 @@
 import SwiftUI
 
 class UserData: ObservableObject {
+    let jsonKey = "habits"
+
     @Published var onboardingDone = false
-    @Published var defaultsChosen = false
+
     @Published var userHabits = [Habit]() {
         didSet {
             if let encoded = try? JSONEncoder().encode(userHabits) {
-                UserDefaults.standard.set(encoded, forKey: "Habits")
+                UserDefaults.standard.set(encoded, forKey: jsonKey)
             }
         }
     }
 
     init() {
-        UserDefaults.standard.removeObject(forKey: "Habits")
-        if let savedHabits = UserDefaults.standard.data(forKey: "Habits") {
+        UserDefaults.standard.removeObject(forKey: jsonKey)
+        if let savedHabits = UserDefaults.standard.data(forKey: jsonKey) {
             if let decodedHabits = try? JSONDecoder().decode([Habit].self, from: savedHabits) {
                 userHabits = decodedHabits
                 if userHabits.count != 0 {
@@ -36,15 +38,11 @@ class UserData: ObservableObject {
 struct ContentView: View {
     @StateObject var userData = UserData()
 
-    @State private var currentPageIndex = 0
-
     var body: some View {
         if !userData.onboardingDone {
-            OnboardingTabView(onboardingDone: $userData.onboardingDone)
-        } else if !userData.defaultsChosen {
-            DefaultHabitsSelectionView(defaultsChosen: $userData.defaultsChosen, userHabits: $userData.userHabits)
+            OnboardingTabView(onboardingDone: $userData.onboardingDone, userHabits: $userData.userHabits)
         } else {
-//            MainHabitsListView()
+            MainHabitsListView(userData: userData)
         }
     }
 }

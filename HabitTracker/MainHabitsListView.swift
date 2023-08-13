@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct MainHabitsListView: View {
-    //    @ObservedObject var userData: UserData
+    @ObservedObject var userData: UserData
 
     var body: some View {
-        //        ForEach(0..<userData.userHabits.count) { i in
-        //            Text(userData.userHabits[i].name)
-        EmptyView()
+        ForEach(0..<userData.userHabits.count, id: \.self) { i in
+            Text(userData.userHabits[i].name)
+        }
     }
 }
 
 struct MainHabitsListView_Previews: PreviewProvider {
-    static var userData = UserData()
-    
+    @ObservedObject static var userData = UserData()
+
     static var previews: some View {
-        MainHabitsListView()
+        MainHabitsListView(userData: userData)
     }
 }
