@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+enum TabColors : String {
+     case yellow = "yellow", green = "green", blue = "blue", pink = "pink", orange = "orange", gray = "gray"
+
+     static let allColors = [yellow, green, blue, pink, orange, gray]
+}
+
+enum Fonts: String {
+    case sfDisplayProBold = "SFProDisplay-Bold"
+    case sfDisplayProSemibold = "SFProDisplay-Semibold"
+    case montserratMedium = "Montserrat-Medium"
+}
+
 class UserData: ObservableObject {
     let jsonKey = "habits"
 

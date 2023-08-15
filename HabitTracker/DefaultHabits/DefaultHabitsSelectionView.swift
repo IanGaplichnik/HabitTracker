@@ -7,22 +7,23 @@
 
 import SwiftUI
 
-struct Habit: Codable {
+struct Habit: Codable, Identifiable {
+    let id = UUID()
     let name: String
     let labelColor: String
-    let complete: Bool
-    let imageName: String?
+    var complete: Bool
     let goal: String?
+    let imageName: String?
 }
 
 struct DefaultHabitsSelectionView: View {
     let defaultHabits = [
-        Habit(name: "Gym", labelColor: "red", complete: false, imageName: "gymIcon", goal: nil),
-        Habit(name: "Writing", labelColor: "red", complete: false, imageName: "writingIcon", goal: nil),
-        Habit(name: "Water", labelColor: "red", complete: false, imageName: "waterIcon", goal: nil),
-        Habit(name: "Art", labelColor: "red", complete: false, imageName: "artsIcon", goal: nil),
-        Habit(name: "Fruits", labelColor: "red", complete: false, imageName: "fruitsIcon", goal: nil),
-        Habit(name: "Sleep", labelColor: "red", complete: false, imageName: "sleepIcon", goal: nil)
+        Habit(name: "Gym", labelColor: TabColors.yellow.rawValue, complete: false, goal: nil, imageName: "gymIcon"),
+        Habit(name: "Writing", labelColor: TabColors.green.rawValue, complete: false, goal: nil, imageName: "writingIcon"),
+        Habit(name: "Water", labelColor: TabColors.blue.rawValue, complete: true, goal: nil, imageName: "waterIcon"),
+        Habit(name: "Art", labelColor: TabColors.pink.rawValue, complete: false, goal: nil, imageName: "artsIcon"),
+        Habit(name: "Fruits", labelColor: TabColors.orange.rawValue, complete: false, goal: nil, imageName: "fruitsIcon"),
+        Habit(name: "Sleep", labelColor: TabColors.gray.rawValue, complete: false, goal: nil, imageName: "sleepIcon")
     ]
     
     @Environment(\.dismiss) var dismiss
@@ -35,6 +36,7 @@ struct DefaultHabitsSelectionView: View {
     var body: some View {
         VStack{
             Spacer()
+            Spacer()
             HStack {
                 Spacer()
                 Button("Skip") {
@@ -45,7 +47,7 @@ struct DefaultHabitsSelectionView: View {
             Spacer()
             Spacer()
             Text("Select the habits you want to improve")
-                .font(.custom("SFProDisplay-Bold", size: 28))
+                .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 28))
             ScrollView {
                 LazyVGrid(columns: columns) {
                     ForEach(0..<defaultHabits.count, id: \.self) { index in
@@ -58,12 +60,13 @@ struct DefaultHabitsSelectionView: View {
                     for index in selectedCardIndecies {
                         print(index)
                         userHabits.append(defaultHabits[index])
+                        sort()
                     }
                     onboardingDone = true
                     dismiss()
                 } label: {
                     Text("Continue")
-                        .font(.custom("SFProDisplay-Bold", size: 20))
+                        .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 20))
                         .padding()
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
@@ -77,6 +80,10 @@ struct DefaultHabitsSelectionView: View {
             .padding(20)
             .ignoresSafeArea()
         }
+    }
+
+    func sort() {
+        userHabits.sort { !$0.complete && $1.complete }
     }
 }
 

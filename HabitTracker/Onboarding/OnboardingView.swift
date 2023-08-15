@@ -46,11 +46,11 @@ struct OnboardingPage: View {
                 }
 
             Text(onboardingPageItem.mainText)
-                .font(.custom("SFProDisplay-Bold", size: 38))
+                .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 38))
                 .padding(.top, 24)
             Spacer()
             Text(onboardingPageItem.secondaryText)
-                .font(.custom("Montserrat-Medium", size: 16))
+                .font(.custom(Fonts.montserratMedium.rawValue, size: 16))
                 .lineSpacing(10)
                 .foregroundColor(.gray)
                 .padding(.top, 4)

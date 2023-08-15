@@ -26,7 +26,7 @@ struct OnboardingTabView: View {
                 }
             } label: {
                 Text(currentPageIndex < itemsCount - 1 ? "Continue" : "Get Started")
-                    .font(.custom("SFProDisplay-Bold", size: 20))
+                    .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 20))
                     .padding()
                     .frame(maxWidth: .infinity)
                     .foregroundColor(.white)

@@ -17,6 +17,25 @@ extension View {
     }
 }
 
+func convertStringToColor(color: String) -> Color {
+    switch color {
+    case TabColors.yellow.rawValue:
+        return Color(hex: 0xF3CE6D)
+    case TabColors.green.rawValue:
+        return Color(hex: 0x57CEBB)
+    case TabColors.blue.rawValue:
+        return Color(hex: 0x5CD3F3)
+    case TabColors.pink.rawValue:
+        return Color(hex: 0xDF9CC7)
+    case TabColors.orange.rawValue:
+        return Color(hex: 0xFFAD5F)
+    case TabColors.gray.rawValue:
+        return Color(hex: 0x9EB5C5)
+    default:
+        return Color(hex: 0x000000)
+    }
+}
+
 struct DefaultHabitCard: View {
     @Environment(\.colorScheme) var colorScheme
 
@@ -52,14 +71,14 @@ struct DefaultHabitCard: View {
                     .resizable()
                     .scaledToFit()
                 Text(habit.name)
-                    .font(.custom("SFProDisplay-Bold", size: 24))
+                    .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 24))
                     .foregroundColor(.black)
                     .padding(.top, 7)
                     .padding(.horizontal, 14)
                     .padding(.bottom, 14)
             }
         }
-        .background(Color(hex: 0xF3CE6D))
+        .background(convertStringToColor(color: habit.labelColor))
         .frame(width: 154)
         .cornerRadius(10)
         .if(!isSelected && colorScheme == .light) { view in
@@ -69,7 +88,7 @@ struct DefaultHabitCard: View {
 }
 
 struct DefaultHabitCard_Previews: PreviewProvider {
-    static var habit = Habit(name: "Gym", labelColor: "red", complete: false, imageName: "gymIcon", goal: nil)
+    static var habit = Habit(name: "Gym", labelColor: TabColors.orange.rawValue, complete: false, goal: nil, imageName: "gymIcon")
 //    @StateObject static var selectedHabits = SelectedCardIndecies()
     @State static var indecies = [Int]()
     static var previews: some View {
