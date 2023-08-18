@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct Habit: Codable, Identifiable {
+struct Habit: Codable, Identifiable, Equatable {
     let id = UUID()
-    let name: String
+    var name: String
     let labelColor: String
     var complete: Bool
     let goal: String?
@@ -17,13 +17,14 @@ struct Habit: Codable, Identifiable {
 }
 
 struct DefaultHabitsSelectionView: View {
+    static let goalString = "Tap to edit goal"
     let defaultHabits = [
-        Habit(name: "Gym", labelColor: TabColors.yellow.rawValue, complete: false, goal: nil, imageName: "gymIcon"),
-        Habit(name: "Writing", labelColor: TabColors.green.rawValue, complete: false, goal: nil, imageName: "writingIcon"),
-        Habit(name: "Water", labelColor: TabColors.blue.rawValue, complete: true, goal: nil, imageName: "waterIcon"),
-        Habit(name: "Art", labelColor: TabColors.pink.rawValue, complete: false, goal: nil, imageName: "artsIcon"),
-        Habit(name: "Fruits", labelColor: TabColors.orange.rawValue, complete: false, goal: nil, imageName: "fruitsIcon"),
-        Habit(name: "Sleep", labelColor: TabColors.gray.rawValue, complete: false, goal: nil, imageName: "sleepIcon")
+        Habit(name: "Gym", labelColor: TabColors.yellow.rawValue, complete: false, goal: goalString, imageName: "gymIcon"),
+        Habit(name: "Writing", labelColor: TabColors.green.rawValue, complete: false, goal: goalString, imageName: "writingIcon"),
+        Habit(name: "Water", labelColor: TabColors.blue.rawValue, complete: false, goal: goalString, imageName: "waterIcon"),
+        Habit(name: "Art", labelColor: TabColors.pink.rawValue, complete: false, goal: goalString, imageName: "artsIcon"),
+        Habit(name: "Fruits", labelColor: TabColors.orange.rawValue, complete: false, goal: goalString, imageName: "fruitsIcon"),
+        Habit(name: "Sleep", labelColor: TabColors.gray.rawValue, complete: false, goal: goalString, imageName: "sleepIcon")
     ]
     
     @Environment(\.dismiss) var dismiss
@@ -58,7 +59,6 @@ struct DefaultHabitsSelectionView: View {
 
                 Button {
                     for index in selectedCardIndecies {
-                        print(index)
                         userHabits.append(defaultHabits[index])
                         sort()
                     }

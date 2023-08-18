@@ -1,35 +1,51 @@
 //
-//  AddHabitView.swift
+//  EditHabitSheet.swift
 //  HabitTracker
 //
-//  Created by MacBook on 14.8.2023.
+//  Created by MacBook on 17.8.2023.
 //
 
 import SwiftUI
 
-struct AddHabitView: View {
-    func sortComplete() {
-        userHabits.sort { !$0.complete && $1.complete }
-    }
+struct EditHabitSheet: View {
+    @State var habitName: String
+    @State var goal: String
+    @Binding var habits: [Habit]
+    @State var colorIndex: Int
+    var indexToEdit: Int
 
-
-    @Binding var userHabits: [Habit]
 
     @Environment(\.dismiss) var dismiss
-    @State private var habitName = ""
-    @State private var goal = ""
-    @State private var selectedColor = -1
+    init(userHabits: Binding<[Habit]>, index: Int, userHabit: Habit) {
+
+        _habits = userHabits
+        indexToEdit = index
+        _habitName = State(initialValue: userHabit.name)
+        _goal = State(initialValue: userHabit.goal ?? "")
+        _colorIndex = State(
+            initialValue: TabColors.allColors.firstIndex(of: TabColors(rawValue: userHabit.labelColor)!)!
+        )
+        print(userHabit)
+        print(index)
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Create new habit")
+                Button {
+                    habits.remove(at: indexToEdit)
+                    dismiss()
+                } label: {
+                    Text("Delete")
+                        .foregroundColor(.red)
+                }
+                Spacer()
+                Text("Edit Habit")
                     .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 28))
                 Spacer()
                 Button("Cancel") {
                     dismiss()
                 }
-                //                .padding(.horizontal)
             }
             Rectangle()
                 .foregroundColor(Color(hex: 0xDBDBDB))
@@ -50,9 +66,9 @@ struct AddHabitView: View {
                 HStack {
                     ForEach(TabColors.allColors, id: \.self) { color in
                         Button {
-                            selectedColor = TabColors.allColors.firstIndex(of: color) ?? -1
+                            colorIndex = TabColors.allColors.firstIndex(of: color) ?? -1
                         } label: {
-                            if selectedColor == TabColors.allColors.firstIndex(of: color) {
+                            if colorIndex == TabColors.allColors.firstIndex(of: color) {
                                 Circle()
                                     .foregroundColor(convertStringToColor(color: color.rawValue))
                                     .overlay(Image(systemName: "checkmark.circle")
@@ -74,40 +90,31 @@ struct AddHabitView: View {
             Spacer()
 
             Button {
-                let habit = Habit(name: habitName.trimmingCharacters(in: .whitespaces),
-                                  labelColor: TabColors.allColors[selectedColor].rawValue,
-                                  complete: false,
-                                  goal: goal.trimmingCharacters(in: .whitespaces),
-                                  imageName: nil)
-                userHabits.append(habit)
-                sortComplete()
-                dismiss()
+                let habit = Habit(name: habitName, labelColor: TabColors.allColors[colorIndex].rawValue, complete: habits[indexToEdit].complete, goal: goal, imageName: nil)
+                    habits.remove(at: indexToEdit)
+                    habits.insert(habit, at: indexToEdit)
+                    dismiss()
             } label: {
-                Text("Add habit")
+                Text("Apply changes")
                     .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 20))
                     .padding()
                     .frame(maxWidth: .infinity)
                     .foregroundColor(.white)
                     .background(
-                        (habitName == "" || goal == "" || selectedColor == -1) ? Color(hex: 0x8DCBFA) : Color(hex: 0x1B98F5))
+                        (habitName == "" || goal == "") ? Color(hex: 0x8DCBFA) : Color(hex: 0x1B98F5))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
             }
-            .disabled(habitName == "" || goal == "" || selectedColor == -1)
+            .disabled(habitName == "" || goal == "")
         }
         .padding(30)
-        .toolbar {
-            Button("Cancel") {
-                dismiss()
-            }
-        }
     }
 
-    struct AddHabitView_Previews: PreviewProvider {
-        @State static var userHabits = [Habit]()
+    struct EditHabitSheet_Previews: PreviewProvider {
+        @State static var userHabits = [Habit(name: "gyn", labelColor: TabColors.pink.rawValue, complete: false, goal: "aksjd", imageName: nil)]
         static var previews: some View {
             NavigationView {
                 Text("").sheet(isPresented: .constant(true)) {
-                    AddHabitView(userHabits: $userHabits)
+                    EditHabitSheet(userHabits: $userHabits, index: 0, userHabit: userHabits[0])
                 }
             }
         }

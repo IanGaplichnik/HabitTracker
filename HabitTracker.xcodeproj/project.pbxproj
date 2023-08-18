@@ -7,28 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0FC7332A8E1E930077CFFE /* EditHabitSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FC7322A8E1E930077CFFE /* EditHabitSheet.swift */; };
 		FA101C832A863719004CD97C /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA101C822A863719004CD97C /* Montserrat-Medium.ttf */; };
 		FA101C852A8637E6004CD97C /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA101C842A8637E6004CD97C /* SF-Pro-Display-Bold.otf */; };
 		FA101C872A863BBF004CD97C /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA101C862A863BBE004CD97C /* SF-Pro-Display-Semibold.otf */; };
 		FA2BD0F92A89185200EEB098 /* MainHabitsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2BD0F82A89185200EEB098 /* MainHabitsListView.swift */; };
+		FA7E945F2A8E83C900366175 /* CardsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E945E2A8E83C900366175 /* CardsGenerator.swift */; };
 		FAC6FEA62A8630A00074E0FF /* HabitTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6FEA52A8630A00074E0FF /* HabitTrackerApp.swift */; };
 		FAC6FEA82A8630A00074E0FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6FEA72A8630A00074E0FF /* ContentView.swift */; };
 		FAC6FEAA2A8630A30074E0FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAC6FEA92A8630A30074E0FF /* Assets.xcassets */; };
 		FAC6FEAD2A8630A30074E0FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAC6FEAC2A8630A30074E0FF /* Preview Assets.xcassets */; };
 		FAC6FEB42A86318D0074E0FF /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6FEB32A86318D0074E0FF /* OnboardingView.swift */; };
 		FACAEBB32A8A3A02008DE87C /* MainViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACAEBB22A8A3A02008DE87C /* MainViewCard.swift */; };
-		FAEA008D2A8A695C00638B46 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEA008C2A8A695B00638B46 /* AddHabitView.swift */; };
+		FAEA008D2A8A695C00638B46 /* AddHabitSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEA008C2A8A695B00638B46 /* AddHabitSheet.swift */; };
 		FAFD49A52A86623F00DBAA94 /* OnboardingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD49A42A86623F00DBAA94 /* OnboardingTabView.swift */; };
 		FAFD49A82A866B7D00DBAA94 /* DefaultHabitsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD49A72A866B7D00DBAA94 /* DefaultHabitsSelectionView.swift */; };
 		FAFD49AB2A86828200DBAA94 /* DefaultHabitCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD49AA2A86828200DBAA94 /* DefaultHabitCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA0FC7322A8E1E930077CFFE /* EditHabitSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitSheet.swift; sourceTree = "<group>"; };
 		FA101C802A863627004CD97C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FA101C822A863719004CD97C /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		FA101C842A8637E6004CD97C /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		FA101C862A863BBE004CD97C /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
 		FA2BD0F82A89185200EEB098 /* MainHabitsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHabitsListView.swift; sourceTree = "<group>"; };
+		FA7E945E2A8E83C900366175 /* CardsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsGenerator.swift; sourceTree = "<group>"; };
 		FAC6FEA22A8630A00074E0FF /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC6FEA52A8630A00074E0FF /* HabitTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerApp.swift; sourceTree = "<group>"; };
 		FAC6FEA72A8630A00074E0FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,7 +40,7 @@
 		FAC6FEAC2A8630A30074E0FF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FAC6FEB32A86318D0074E0FF /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		FACAEBB22A8A3A02008DE87C /* MainViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCard.swift; sourceTree = "<group>"; };
-		FAEA008C2A8A695B00638B46 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
+		FAEA008C2A8A695B00638B46 /* AddHabitSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitSheet.swift; sourceTree = "<group>"; };
 		FAFD49A42A86623F00DBAA94 /* OnboardingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTabView.swift; sourceTree = "<group>"; };
 		FAFD49A72A866B7D00DBAA94 /* DefaultHabitsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHabitsSelectionView.swift; sourceTree = "<group>"; };
 		FAFD49AA2A86828200DBAA94 /* DefaultHabitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHabitCard.swift; sourceTree = "<group>"; };
@@ -107,8 +111,10 @@
 			isa = PBXGroup;
 			children = (
 				FA2BD0F82A89185200EEB098 /* MainHabitsListView.swift */,
+				FA7E945E2A8E83C900366175 /* CardsGenerator.swift */,
 				FACAEBB22A8A3A02008DE87C /* MainViewCard.swift */,
-				FAEA008C2A8A695B00638B46 /* AddHabitView.swift */,
+				FAEA008C2A8A695B00638B46 /* AddHabitSheet.swift */,
+				FA0FC7322A8E1E930077CFFE /* EditHabitSheet.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -204,12 +210,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA0FC7332A8E1E930077CFFE /* EditHabitSheet.swift in Sources */,
 				FAC6FEA82A8630A00074E0FF /* ContentView.swift in Sources */,
 				FAFD49A82A866B7D00DBAA94 /* DefaultHabitsSelectionView.swift in Sources */,
+				FA7E945F2A8E83C900366175 /* CardsGenerator.swift in Sources */,
 				FAFD49AB2A86828200DBAA94 /* DefaultHabitCard.swift in Sources */,
 				FAC6FEA62A8630A00074E0FF /* HabitTrackerApp.swift in Sources */,
 				FAC6FEB42A86318D0074E0FF /* OnboardingView.swift in Sources */,
-				FAEA008D2A8A695C00638B46 /* AddHabitView.swift in Sources */,
+				FAEA008D2A8A695C00638B46 /* AddHabitSheet.swift in Sources */,
 				FAFD49A52A86623F00DBAA94 /* OnboardingTabView.swift in Sources */,
 				FA2BD0F92A89185200EEB098 /* MainHabitsListView.swift in Sources */,
 				FACAEBB32A8A3A02008DE87C /* MainViewCard.swift in Sources */,

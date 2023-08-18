@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct MainViewCard: View {
-//    @State 
-    let habit: Habit
+    @Binding var habits: [Habit]
+    @Binding var habit: Habit
 
     var body: some View {
         HStack {
@@ -25,35 +25,50 @@ struct MainViewCard: View {
             .padding()
             Spacer()
             if habit.complete {
-                Image("completeHabit")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(habit.complete ? Color(hex: 0x03A744) : .white)
-                    .frame(height: 80)
-                    .cornerRadius(habit.complete ? 0 : 40)
-                    .padding(.horizontal, 7)
+                Button {
+                    habit.complete = false
+                    sort()
+                } label: {
+                    Image("completeHabit")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(habit.complete ? Color(hex: 0x03A744) : .white)
+                        .frame(height: 80)
+                        .cornerRadius(habit.complete ? 0 : 40)
+                        .padding(.horizontal, 7)
+                }
             } else {
-                Image(systemName: "circle")
-                    .resizable()
-                    .background(Color(hex: 0xEAEAEA))
-                    .foregroundColor(.white)
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(40)
-                    .padding()
+                Button {
+                    habit.complete = true
+                    sort()
+                } label: {
+                    Image(systemName: "circle")
+                        .resizable()
+                        .background(Color(hex: 0xEAEAEA))
+                        .foregroundColor(.white)
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(40)
+                        .padding()
+                }
             }
         }
         .background(habit.complete ? Color(hex: 0xF8F8F8) : convertStringToColor(color: habit.labelColor))
         .cornerRadius(10)
     }
+
+    func sort() {
+        habits.sort { !$0.complete && $1.complete }
+    }
+    
 }
 
 struct MainViewCard_Previews: PreviewProvider {
-    static var habitGoal = Habit(name: "Gym", labelColor: "yellow", complete: false, goal: "2 times a day", imageName: "gymIcon")
+    @State static var habitGoal = [Habit(name: "Gym", labelColor: TabColors.yellow.rawValue, complete: false, goal: "2 times a day", imageName: "gymIcon")]
 
-    static var doneGoal = Habit(name: "Gym", labelColor: "yellow", complete: true, goal: "2 times a day", imageName: "gymIcon")
+    @State static var doneGoal = [Habit(name: "Gym", labelColor: TabColors.yellow.rawValue, complete: true, goal: "2 times a day", imageName: "gymIcon")]
 
     static var previews: some View {
-        MainViewCard(habit: habitGoal)
-//        MainViewCard(habit: doneGoal)
+        MainViewCard(habits: $habitGoal, habit: $habitGoal[0])
+        MainViewCard(habits: $doneGoal, habit: $doneGoal[0])
     }
 }
