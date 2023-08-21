@@ -7,40 +7,24 @@
 
 import SwiftUI
 
-struct OnboardingTabView: View {
-    struct OnboardingButton: View {
-        @Binding var currentPageIndex: Int
-        @Binding var userHabits: [Habit]
-        @Binding var sheetIsShowing: Bool
-        let itemsCount: Int
-        @Binding var onboardingDone: Bool
+struct ButtonLabel: View {
+    let buttonText: String
+    let buttonFont: String
+    let fontSize: CGFloat
+    let buttonColor: Color
 
-        var body: some View {
-            Button() {
-                withAnimation {
-                    if currentPageIndex != itemsCount - 1 {
-                        currentPageIndex += 1
-                    } else {
-                        sheetIsShowing = true
-                    }
-                }
-            } label: {
-                Text(currentPageIndex < itemsCount - 1 ? "Continue" : "Get Started")
-                    .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 20))
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.white)
-                    .background(Color(hex: 0x1B98F5))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            }
-            .padding(.horizontal, 30)
-            .padding(.vertical)
-            .sheet(isPresented: $sheetIsShowing) {
-                DefaultHabitsSelectionView(userHabits: $userHabits, onboardingDone: $onboardingDone)
-            }
-        }
+    var body: some View {
+        Text(buttonText)
+            .font(.custom(buttonFont, size: fontSize))
+            .padding()
+            .frame(maxWidth: .infinity)
+            .foregroundColor(.white)
+            .background(buttonColor)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
     }
+}
 
+struct OnboardingTabView: View {
     @State private var currentPageIndex = 0
     @State private var sheetIsShowing = false
     @Binding var onboardingDone: Bool
@@ -65,7 +49,7 @@ struct OnboardingTabView: View {
         VStack {
             TabView(selection: $currentPageIndex) {
                 ForEach(items) { item in
-                    OnboardingPage(onboardingPageItem: item, pageIndex: $currentPageIndex)
+                    OnboardingPage(onboardingPageItem: item)
                         .tag(item.id)
                 }
             }
@@ -73,14 +57,31 @@ struct OnboardingTabView: View {
             .onAppear {
                 setupColor()
             }
-            OnboardingButton(currentPageIndex: $currentPageIndex,
-                             userHabits: $userHabits,
-                             sheetIsShowing: $sheetIsShowing,
-                             itemsCount: items.count,
-                             onboardingDone: $onboardingDone)
+            onboardingButton
         }
     }
 
+    var onboardingButton: some View {
+        Button() {
+            withAnimation {
+                if currentPageIndex == items.count - 1 {
+                    sheetIsShowing = true
+                } else {
+                    currentPageIndex += 1
+                }
+            }
+        } label: {
+            ButtonLabel(buttonText: currentPageIndex < items.count - 1 ? "Continue" : "Get Started",
+                        buttonFont: Fonts.sfDisplayProBold.rawValue,
+                        fontSize: 20,
+                        buttonColor: Color(hex: 0x1B98F5))
+        }
+        .padding(.horizontal, 30)
+        .padding(.vertical)
+        .sheet(isPresented: $sheetIsShowing) {
+            DefaultHabitsSelectionView(userHabits: $userHabits, onboardingDone: $onboardingDone)
+        }
+    }
 
     func setupColor() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.label

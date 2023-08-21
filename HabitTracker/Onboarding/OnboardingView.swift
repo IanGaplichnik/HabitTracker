@@ -28,38 +28,47 @@ struct OnboardingItem: Identifiable {
 
 struct OnboardingPage: View {
     let onboardingPageItem: OnboardingItem
-    @Binding var pageIndex: Int
 
     var body: some View {
         VStack {
             Spacer()
-            Image(onboardingPageItem.image)
-                .resizable()
-                .frame(maxWidth: .infinity)
-                .scaledToFit()
-                .mask() {
-                    if onboardingPageItem.id == 1 {
-                        LinearGradient(colors: [.white.opacity(0), .primary], startPoint: .bottom, endPoint: .top)
-                    } else {
-                        Color.white.opacity(1)
-                    }
-                }
-
-            Text(onboardingPageItem.mainText)
-                .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 38))
-                .padding(.top, 24)
+            centralImage
+            title
             Spacer()
-            Text(onboardingPageItem.secondaryText)
-                .font(.custom(Fonts.montserratMedium.rawValue, size: 16))
-                .lineSpacing(10)
-                .foregroundColor(.gray)
-                .padding(.top, 4)
-                .multilineTextAlignment(.center)
-
+            secondaryText
             Spacer()
             Spacer()
         }
         .padding(.horizontal, 30)
+    }
+
+    private var centralImage: some View {
+        Image(onboardingPageItem.image)
+            .resizable()
+            .frame(maxWidth: .infinity)
+            .scaledToFit()
+            .mask() {
+                if onboardingPageItem.id == 1 {
+                    LinearGradient(colors: [.white.opacity(0), .primary], startPoint: .bottom, endPoint: .top)
+                } else {
+                    Color.white.opacity(1)
+                }
+            }
+    }
+
+    private var title: some View {
+        Text(onboardingPageItem.mainText)
+            .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 38))
+            .padding(.top, 24)
+    }
+
+   private var secondaryText: some View {
+        Text(onboardingPageItem.secondaryText)
+            .font(.custom(Fonts.montserratMedium.rawValue, size: 16))
+            .lineSpacing(10)
+            .foregroundColor(.gray)
+            .padding(.top, 4)
+            .multilineTextAlignment(.center)
     }
 }
 
@@ -67,13 +76,25 @@ struct OnboardingPage: View {
 
     struct OnboardingPage_Previews: PreviewProvider {
         @State static var pageIndex = 1
-        static let item = OnboardingItem(id: 0,
-                                         mainText: "Habbit Tracker",
-                                         secondaryText: "Become better every day by setting the goals and track your habits",
-                                         image: "onboardingScreenImage3")
+        static let items = [
+            OnboardingItem(id: 0,
+                           mainText: "Habbit Tracker",
+                           secondaryText: "Become better every day by setting the goals and tracking your habits",
+                           image: "onboardingScreenImage1"),
+            OnboardingItem(id: 1,
+                           mainText: "No limits",
+                           secondaryText: "You can pick a goal we have prepared for you or make your own!",
+                           image: "onboardingScreenImage2"),
+            OnboardingItem(id: 2,
+                           mainText: "Never miss a thing",
+                           secondaryText: "Simple yet effective UI helps you to mark completed tasks!",
+                           image: "onboardingScreenImage3")
+        ]
 
         static var previews: some View {
-            OnboardingPage(onboardingPageItem: item, pageIndex: $pageIndex)
+            ForEach(items) { item in
+                OnboardingPage(onboardingPageItem: item)
+            }
             //            .preferredColorScheme(.dark)
         }
     }

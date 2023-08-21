@@ -36,7 +36,7 @@ func convertStringToColor(color: String) -> Color {
     }
 }
 
-struct DefaultHabitCard: View {
+struct DefaultHabitCardView: View {
     @Environment(\.colorScheme) var colorScheme
 
     let habit: Habit
@@ -87,11 +87,11 @@ struct DefaultHabitCard: View {
     }
 }
 
-struct DefaultHabitCard_Previews: PreviewProvider {
-    static var habit = Habit(name: "Gym", labelColor: TabColors.orange.rawValue, complete: false, goal: nil, imageName: "gymIcon")
+struct DefaultHabitCardView_Previews: PreviewProvider {
+    static var habit = Habit(name: "Gym", labelColor: TabColors.orange.rawValue, complete: false, goal: "test", imageName: "gymIcon")
 //    @StateObject static var selectedHabits = SelectedCardIndecies()
     @State static var indecies = [Int]()
     static var previews: some View {
-        DefaultHabitCard(habit: habit, id: 1, selectedCardIndecies: $indecies)
+        DefaultHabitCardView(habit: habit, id: 1, selectedCardIndecies: $indecies)
     }
 }

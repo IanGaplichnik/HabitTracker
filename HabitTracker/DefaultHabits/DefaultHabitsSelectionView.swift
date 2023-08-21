@@ -7,15 +7,6 @@
 
 import SwiftUI
 
-struct Habit: Codable, Identifiable, Equatable {
-    let id = UUID()
-    var name: String
-    let labelColor: String
-    var complete: Bool
-    let goal: String?
-    let imageName: String?
-}
-
 struct DefaultHabitsSelectionView: View {
     static let goalString = "Tap to edit goal"
     let defaultHabits = [
@@ -36,51 +27,62 @@ struct DefaultHabitsSelectionView: View {
 
     var body: some View {
         VStack{
-            Spacer()
-            Spacer()
+            header
+            scrollBody
+        }
+    }
+
+    var header: some View {
+        VStack {
             HStack {
                 Spacer()
                 Button("Skip") {
                     onboardingDone = true
                 }
-                .padding(.horizontal)
+                .padding()
             }
-            Spacer()
-            Spacer()
             Text("Select the habits you want to improve")
                 .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 28))
-            ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(0..<defaultHabits.count, id: \.self) { index in
-                        DefaultHabitCard(habit: defaultHabits[index], id: index, selectedCardIndecies: $selectedCardIndecies)
-                    }
-                    .padding(.vertical, 10)
-                }
-
-                Button {
-                    for index in selectedCardIndecies {
-                        userHabits.append(defaultHabits[index])
-                        sort()
-                    }
-                    onboardingDone = true
-                    dismiss()
-                } label: {
-                    Text("Continue")
-                        .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 20))
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.white)
-                        .background(selectedCardIndecies.count == 0 ? Color(hex: 0x8DCBFA) : Color(hex: 0x1B98F5))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                }
-                .padding(.top, 20)
-                .disabled(selectedCardIndecies.count == 0)
-                Spacer()
-            }
-            .padding(20)
-            .ignoresSafeArea()
         }
     }
+
+    var scrollBody: some View {
+        ScrollView {
+            cardGridGenerator
+            continueButton
+                .padding(.top, 20)
+                .disabled(selectedCardIndecies.count == 0)
+            Spacer()
+        }
+        .padding(20)
+        .ignoresSafeArea()
+    }
+
+    var cardGridGenerator: some View {
+        LazyVGrid(columns: columns) {
+            ForEach(0..<defaultHabits.count, id: \.self) { index in
+                DefaultHabitCardView(habit: defaultHabits[index], id: index, selectedCardIndecies: $selectedCardIndecies)
+            }
+            .padding(.vertical, 10)
+        }
+    }
+
+    var continueButton: some View {
+        Button {
+            for index in selectedCardIndecies {
+                userHabits.append(defaultHabits[index])
+                sort()
+            }
+            onboardingDone = true
+            dismiss()
+        } label: {
+            ButtonLabel(buttonText: "Continue",
+                        buttonFont: Fonts.sfDisplayProBold.rawValue,
+                        fontSize: 20,
+                        buttonColor: selectedCardIndecies.count == 0 ? Color(hex: 0x8DCBFA) : Color(hex: 0x1B98F5))
+        }
+    }
+
 
     func sort() {
         userHabits.sort { !$0.complete && $1.complete }

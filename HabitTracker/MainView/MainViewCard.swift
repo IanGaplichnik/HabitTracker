@@ -13,47 +13,59 @@ struct MainViewCard: View {
 
     var body: some View {
         HStack {
-            VStack(alignment: .leading) {
-                Text(habit.name)
-                    .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 24))
-                    .padding(.bottom, 1)
-                    .foregroundColor(habit.complete ? Color(hex: 0x03A744) : .primary)
-                Text(habit.goal ?? "Goal?")
-                    .font(.custom("Montseratt-Medium", size: 14))
-                    .foregroundColor(habit.complete ? Color(hex: 0x03A744) : .secondary)
-            }
-            .padding()
+            buttonText
+                .padding()
             Spacer()
             if habit.complete {
-                Button {
-                    habit.complete = false
-                    sort()
-                } label: {
-                    Image("completeHabit")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(habit.complete ? Color(hex: 0x03A744) : .white)
-                        .frame(height: 80)
-                        .cornerRadius(habit.complete ? 0 : 40)
-                        .padding(.horizontal, 7)
-                }
+               completeButtonWithImage
             } else {
-                Button {
-                    habit.complete = true
-                    sort()
-                } label: {
-                    Image(systemName: "circle")
-                        .resizable()
-                        .background(Color(hex: 0xEAEAEA))
-                        .foregroundColor(.white)
-                        .frame(width: 50, height: 50)
-                        .cornerRadius(40)
-                        .padding()
-                }
+               notCompleteButtonWithImage
             }
         }
         .background(habit.complete ? Color(hex: 0xF8F8F8) : convertStringToColor(color: habit.labelColor))
         .cornerRadius(10)
+    }
+
+    var buttonText: some View {
+        VStack(alignment: .leading) {
+            Text(habit.name)
+                .font(.custom(Fonts.sfDisplayProBold.rawValue, size: 24))
+                .padding(.bottom, 1)
+                .foregroundColor(habit.complete ? Color(hex: 0x03A744) : .primary)
+            Text(habit.goal)
+                .font(.custom(Fonts.montserratMedium.rawValue, size: 14))
+                .foregroundColor(habit.complete ? Color(hex: 0x03A744) : .secondary)
+        }
+    }
+
+    var completeButtonWithImage: some View {
+        Button {
+            habit.complete = false
+            sort()
+        } label: {
+            Image("completeHabit")
+                .resizable()
+                .scaledToFit()
+                .foregroundColor(habit.complete ? Color(hex: 0x03A744) : .white)
+                .frame(height: 80)
+                .cornerRadius(habit.complete ? 0 : 40)
+                .padding(.horizontal, 7)
+        }
+    }
+
+    var notCompleteButtonWithImage: some View {
+        Button {
+            habit.complete = true
+            sort()
+        } label: {
+            Image(systemName: "circle")
+                .resizable()
+                .background(Color(hex: 0xEAEAEA))
+                .foregroundColor(.white)
+                .frame(width: 50, height: 50)
+                .cornerRadius(40)
+                .padding()
+        }
     }
 
     func sort() {
