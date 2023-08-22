@@ -10,7 +10,7 @@ import SwiftUI
 struct AddHabitSheet: View {
     @Environment(\.dismiss) var dismiss
     @Binding var userHabits: [Habit]
-    @State private var habitName = ""
+    @State private var habitName: String = ""
     @State private var goal = ""
     @State private var selectedColorIndex = -1
 
@@ -18,8 +18,8 @@ struct AddHabitSheet: View {
         VStack(alignment: .leading) {
             header
             SheetBodyComponentView(habitName: $habitName,
-                          goal: $goal,
-                          selectedColorIndex: $selectedColorIndex)
+                                   goal: $goal,
+                                   selectedColorIndex: $selectedColorIndex)
             Spacer()
             addHabitButton
         }

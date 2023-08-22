@@ -12,6 +12,8 @@ struct SheetBodyComponentView: View {
     @Binding var goal: String
     @Binding var selectedColorIndex: Int
 
+    let textLengthLimit = 14
+
     var body: some View {
         VStack(alignment: .leading) {
             Rectangle()
@@ -21,13 +23,42 @@ struct SheetBodyComponentView: View {
                 .padding(.top)
             TextField("Yoga", text: $habitName)
                 .textFieldStyle(.roundedBorder)
+                .onChange(of: habitName) { _ in
+                    if self.habitName.trimmingCharacters(in: .whitespaces).isEmpty {
+                        self.habitName = ""
+                    }
+                    if self.habitName.count > textLengthLimit {
+                        self.habitName = String(self.habitName.prefix(textLengthLimit))
+                    }
+                }
+            HStack {
+                Spacer()
+                Text("\(habitName.count)/\(textLengthLimit)")
+                    .padding(.horizontal)
+                    .foregroundColor(.secondary)
+                    .font(.footnote)
+            }
 
             Text("Set the goal")
-                .padding(.top)
             TextField("30 minutes a day", text: $goal)
                 .textFieldStyle(.roundedBorder)
+                .onChange(of: goal) { _ in
+                    if self.goal.trimmingCharacters(in: .whitespaces).isEmpty {
+                        self.goal = ""
+                    }
+                    if self.goal.count > textLengthLimit {
+                        self.goal = String(self.goal.prefix(textLengthLimit))
+                    }
+                }
+            HStack {
+                Spacer()
+                Text("\(goal.count)/\(textLengthLimit)")
+                    .padding(.horizontal)
+                    .foregroundColor(.secondary)
+                    .font(.footnote)
+            }
+
             Text("Select label color")
-                .padding(.top)
             labelColorSelector
                 .frame(height: 50)
         }

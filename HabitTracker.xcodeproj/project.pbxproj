@@ -16,6 +16,7 @@
 		FA2BF0832A92A5A10007C863 /* EmptyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2BF0822A92A5A10007C863 /* EmptyMainView.swift */; };
 		FA2BF0852A92A6330007C863 /* FilledHabitsMainListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2BF0842A92A6330007C863 /* FilledHabitsMainListView.swift */; };
 		FA7548FB2A9364230085C1B0 /* SheetBodyComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7548FA2A9364230085C1B0 /* SheetBodyComponentView.swift */; };
+		FA7548FD2A9399E20085C1B0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7548FC2A9399E20085C1B0 /* Extensions.swift */; };
 		FAC6FEA62A8630A00074E0FF /* HabitTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6FEA52A8630A00074E0FF /* HabitTrackerApp.swift */; };
 		FAC6FEA82A8630A00074E0FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6FEA72A8630A00074E0FF /* ContentView.swift */; };
 		FAC6FEAA2A8630A30074E0FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAC6FEA92A8630A30074E0FF /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		FA2BF0822A92A5A10007C863 /* EmptyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainView.swift; sourceTree = "<group>"; };
 		FA2BF0842A92A6330007C863 /* FilledHabitsMainListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledHabitsMainListView.swift; sourceTree = "<group>"; };
 		FA7548FA2A9364230085C1B0 /* SheetBodyComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetBodyComponentView.swift; sourceTree = "<group>"; };
+		FA7548FC2A9399E20085C1B0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FAC6FEA22A8630A00074E0FF /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC6FEA52A8630A00074E0FF /* HabitTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerApp.swift; sourceTree = "<group>"; };
 		FAC6FEA72A8630A00074E0FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				FA101C802A863627004CD97C /* Info.plist */,
 				FAC6FEA52A8630A00074E0FF /* HabitTrackerApp.swift */,
 				FA2BF07F2A928DDD0007C863 /* DataClass.swift */,
+				FA7548FC2A9399E20085C1B0 /* Extensions.swift */,
 				FAC6FEA72A8630A00074E0FF /* ContentView.swift */,
 				FAFD49A62A86624E00DBAA94 /* Onboarding */,
 				FAFD49A92A86826800DBAA94 /* DefaultHabits */,
@@ -237,6 +240,7 @@
 				FA2BF0852A92A6330007C863 /* FilledHabitsMainListView.swift in Sources */,
 				FAEA008D2A8A695C00638B46 /* AddHabitSheet.swift in Sources */,
 				FAFD49A52A86623F00DBAA94 /* OnboardingTabView.swift in Sources */,
+				FA7548FD2A9399E20085C1B0 /* Extensions.swift in Sources */,
 				FA2BF0832A92A5A10007C863 /* EmptyMainView.swift in Sources */,
 				FA2BD0F92A89185200EEB098 /* MainHabitsListView.swift in Sources */,
 				FACAEBB32A8A3A02008DE87C /* MainViewCard.swift in Sources */,
